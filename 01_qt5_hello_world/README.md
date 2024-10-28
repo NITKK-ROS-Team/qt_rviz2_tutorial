@@ -1,4 +1,4 @@
-# Qt5 Hello World!
+# 1. Qt5 Hello World!
 
 ここでは、Qt5を使った簡単なプログラム作成例を示します。
 
