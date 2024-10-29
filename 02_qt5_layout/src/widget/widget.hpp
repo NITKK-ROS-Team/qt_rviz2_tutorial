@@ -11,20 +11,22 @@
 // xxx.ui -> ui_xxx.h
 #include "ui_qt5_layout.h"
 
-namespace qt5_layout {
+namespace qt5_layout
+{
 
 // Widgetのクラス
-class ExampleWidget : public QWidget{
+class ExampleWidget : public QWidget
+{
 public:
-    // 初期化
-    explicit ExampleWidget(QWidget *);
+  // 初期化
+  explicit ExampleWidget(QWidget *);
 
 private:
-    // ボタンがクリックされたときの処理
-    void onPushButtonClicked();
+  // ボタンがクリックされたときの処理
+  void onPushButtonClicked();
 
 private:
-    Ui::ExampleWidget ui;
+  Ui::ExampleWidget ui;
 };
 
 } // namespace qt5_layout

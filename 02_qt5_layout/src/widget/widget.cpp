@@ -6,19 +6,23 @@
 
 #include "widget/widget.hpp"
 
-namespace qt5_layout {
+namespace qt5_layout
+{
 
-ExampleWidget::ExampleWidget(QWidget *parent = nullptr) : QWidget(parent) {
-    // UIの初期化
-    ui.setupUi(this);
-    // ボタンがクリックされたときの処理を設定
-    connect(ui.example_push_button, &QPushButton::clicked, this, &ExampleWidget::onPushButtonClicked);
+ExampleWidget::ExampleWidget(QWidget * parent = nullptr)
+: QWidget(parent)
+{
+  // UIの初期化
+  ui.setupUi(this);
+  // ボタンがクリックされたときの処理を設定
+  connect(ui.example_push_button, &QPushButton::clicked, this, &ExampleWidget::onPushButtonClicked);
 }
 
-void ExampleWidget::onPushButtonClicked(){
-    static uint32_t counter = 0;
-    // カウンタをインクリメントしてラベルに表示
-    ui.example_label->setText(QString("%1").arg(++counter));
+void ExampleWidget::onPushButtonClicked()
+{
+  static uint32_t counter = 0;
+  // カウンタをインクリメントしてラベルに表示
+  ui.example_label->setText(QString("%1").arg(++counter));
 }
-    
+
 } // namespace qt5_layout

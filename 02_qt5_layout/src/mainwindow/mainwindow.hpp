@@ -10,11 +10,13 @@
 #include <QMainWindow>
 #include "widget/widget.hpp"
 
-namespace qt5_layout {
+namespace qt5_layout
+{
 
-class ExampleWindow : public QMainWindow{
+class ExampleWindow : public QMainWindow
+{
 public:
-    explicit ExampleWindow(QWidget * = nullptr);
+  explicit ExampleWindow(QWidget * = nullptr);
 };
 
 } // namespace qt5_layout
