@@ -6,7 +6,7 @@
 
 #include "widget/widget.hpp"
 
-namespace qt5_layout {
+namespace rviz2panel_hello {
 
 ExampleWidget::ExampleWidget(QWidget *parent = nullptr) : QWidget(parent) {
     // UIの初期化
@@ -20,5 +20,5 @@ void ExampleWidget::onPushButtonClicked(){
     // カウンタをインクリメントしてラベルに表示
     ui.example_label->setText(QString("%1").arg(++counter));
 }
-    
-} // namespace qt5_layout
+
+} // namespace rviz2panel_hello

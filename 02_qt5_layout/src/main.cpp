@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]){
     QApplication app(argc, argv);
-    ExampleWindow window;
+    qt5_layout::ExampleWindow window;
     window.show();
     return app.exec();
 }

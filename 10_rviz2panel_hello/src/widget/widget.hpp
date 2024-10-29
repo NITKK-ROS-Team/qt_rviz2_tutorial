@@ -9,9 +9,9 @@
 
 // 作成した.uiファイル名によって変わる
 // xxx.ui -> ui_xxx.h
-#include "ui_qt5_layout.h"
+#include "ui_rviz2panel_hello.h"
 
-namespace qt5_layout {
+namespace rviz2panel_hello {
 
 // Widgetのクラス
 class ExampleWidget : public QWidget{
@@ -27,6 +27,6 @@ private:
     Ui::ExampleWidget ui;
 };
 
-} // namespace qt5_layout
+} // namespace rviz2panel_hello
 
 #endif //QT5_LAYOUT_WIDGET_WIDGET_HPP

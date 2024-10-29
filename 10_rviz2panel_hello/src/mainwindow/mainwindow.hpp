@@ -10,13 +10,13 @@
 #include <QMainWindow>
 #include "widget/widget.hpp"
 
-namespace qt5_layout {
+namespace rviz2panel_hello {
 
 class ExampleWindow : public QMainWindow{
 public:
     explicit ExampleWindow(QWidget * = nullptr);
 };
 
-} // namespace qt5_layout
+} // namespace rviz2panel_hello
 
 #endif //QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP

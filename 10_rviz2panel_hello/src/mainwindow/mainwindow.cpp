@@ -6,7 +6,7 @@
 
 #include "mainwindow.hpp"
 
-namespace qt5_layout {
+namespace rviz2panel_hello {
 
 ExampleWindow::ExampleWindow(QWidget * parent)
 : QMainWindow(parent) {
@@ -19,4 +19,4 @@ ExampleWindow::ExampleWindow(QWidget * parent)
     setCentralWidget(new ExampleWidget(this));
 }
 
-} // namespace qt5_layout
+} // namespace rviz2panel_hello
