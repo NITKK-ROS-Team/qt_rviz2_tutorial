@@ -16,7 +16,7 @@ set(TARGET_WIDGET qt5_layout_widget)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/
     # (あまり美しくないが)自動生成されたヘッダファイルのパスを追加
-    ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_WIDGET}_autogen/include
+    ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_WIDGET}_autogen/include
 )
 add_library(${TARGET_WIDGET}
     src/widget/qt5_layout.ui 
