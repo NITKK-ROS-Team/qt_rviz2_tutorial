@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP
-#define QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP
+#ifndef QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP_
+#define QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP_
 
 #include <QMainWindow>
 #include "widget/widget.hpp"
@@ -21,4 +21,4 @@ public:
 
 } // namespace qt5_layout
 
-#endif //QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP
+#endif //QT5_LAYOUT_MAINWINDOW_MAINWINDOW_HPP_

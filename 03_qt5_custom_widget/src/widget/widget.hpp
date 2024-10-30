@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef QT5_LAYOUT_WIDGET_WIDGET_HPP_
-#define QT5_LAYOUT_WIDGET_WIDGET_HPP_
+#ifndef QT5_CUSTOM_WIDGET_WIDGET_HPP_
+#define QT5_CUSTOM_WIDGET_WIDGET_HPP_
 
 // 作成した.uiファイル名によって変わる
 // xxx.ui -> ui_xxx.h
-#include "ui_qt5_layout.h"
+#include "ui_qt5_custom_widget.h"
 
-namespace qt5_layout
+namespace qt5_custom_widget
 {
 
 // Widgetのクラス
@@ -29,6 +29,6 @@ private:
   Ui::ExampleWidget ui;
 };
 
-} // namespace qt5_layout
+} // namespace qt5_custom_widget
 
-#endif //QT5_LAYOUT_WIDGET_WIDGET_HPP_
+#endif //QT5_CUSTOM_WIDGET_WIDGET_HPP_

@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef RVIZ2PANEL_HELLO_WIDGET_HPP
-#define RVIZ2PANEL_HELLO_WIDGET_HPP
+#ifndef RVIZ2PANEL_HELLO_WIDGET_HPP_
+#define RVIZ2PANEL_HELLO_WIDGET_HPP_
 
 // 作成した.uiファイル名によって変わる
 // xxx.ui -> ui_xxx.h
@@ -42,4 +42,4 @@ private:
 
 } // namespace rviz2panel_hello
 
-#endif //RVIZ2PANEL_HELLO_WIDGET_HPP
+#endif //RVIZ2PANEL_HELLO_WIDGET_HPP_
