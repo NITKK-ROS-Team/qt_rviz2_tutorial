@@ -1,128 +1,209 @@
-# 2. Layout・ファイル分割
+# 10. Rviz2への移植
 
-Layoutは、ウィジェットの配置を管理するための仕組みです。Layoutを使用することで、ウィジェットの配置を柔軟に変更することができます。
+ROS 2のGUIツールであるRviz2には、Qtウィジェットを埋め込むことができます。
 
-Qt Designerを使用して自由に配置してみましょう。
+このチュートリアルでは、Qt5で作成したウィジェットをRviz2に埋め込む方法を解説します。
 
-### Layoutの設定
+### Rviz2とは
 
-[1. Qt5 Hello World!](../01_qt5_hello_world/README.md)と同様に、Qt Designerを起動して、UIを作成します。
+Rviz2は、ROS 2のGUIツールの1つで、3D可視化ツールです。センサデータやロボットの状態を3Dで表示でき、ロボットの動作確認やデバッグに利用されます。
 
-左側のWidget Boxに、「Layouts」があります。これらから適切なLayoutを選択して配置します。
+さまざまな機能を内包しており、ユーザはプラグインを追加することでその機能を拡張することができます。
 
-![](../imgs/008_00_qt5_layouts.png)
+![](../imgs/017_00_rviz2.png)
 
-それぞれ役割が異なり、Layoutの中にさらにLayoutを配置することもできます。
+Rviz2にはQtウィジェットを配置可能なスペース（①〜④）が用意されており、このスペースにQtウィジェットを埋め込むことができます。
 
-| Layout | 説明 |
-|:--|:--|
-| QVBoxLayout | 垂直方向にウィジェットを配置します。 |
-| QHBoxLayout | 水平方向にウィジェットを配置します。 |
-| QGridLayout | グリッド状にウィジェットを配置します。 |
-| QFormLayout | ラベルとエディットボックスをペアで配置します。 |
+一つの区画の中に複数のウィジェットを配置することも可能です。
 
-LayoutsもWidgetと同様に、ドラッグ&ドロップで配置します。
-Layoutsの中にWidgetを近づけると、配置される位置がハイライトされるので、適切な位置でマウスを離すと配置されます。
+![](../imgs/018_00_rviz2_qt.png)
 
-![](../imgs/009_00_qt5_layout_widget.png)
+また、Qtウィジェットを外に出すこともできます。
 
-とりあえず、適当に配置してみました。uiの名前に沿ってコードを記述すれば、これらのウィジェットは自動で動作します。
+![](../imgs/019_00_rviz2_panel_out.png)
 
-![](../imgs/011_00_qt5_layout_full.png)
+## Rviz2向けプラグインの作成
 
-右側のタブ「Object Inspector」で配置したLayoutを確認すると、次のようになります。
+ディレクトリ構造を以下に示します。
 
-![](../imgs/010_00_qt5_layout_hierarchy.png)
-
-<br>
-
-## コード（ファイル分割編）
-
-このuiファイルでも、前回のコードでそのまま動きますが、今回はファイル分割を行います。
-
-### ファイル構成
-
-このチュートリアルでは、Classごとにファイルを分割するようにします。
-分割ルールはこれに従う必要はないので、自分の好みに合わせて変更してください。
+Rviz2向けのプラグインはROS 2パッケージとしてビルドするため、ROS 2のパッケージ構造に従っています。
 
 ```bash
 .
 ├── CMakeLists.txt
+├── package.xml # new
+├── plugins_description.xml # new
 ├── README.md
 └── src
-    ├── main.cpp
-    ├── mainwindow
-    │   ├── mainwindow.cpp
-    │   └── mainwindow.hpp
     └── widget
-        ├── qt5_layout.ui
+        ├── rviz2panel_hello.ui
         ├── widget.cpp
         └── widget.hpp
 
-3 directories, 8 files
+2 directories, 7 files
 ```
 
-<br>
+### 継承クラスの変更
 
-### CMakelists.txt
+Rviz2向けのプラグインを作成するためには、`rviz_common::Panel`クラスを継承する必要があります。
 
-mainwindow.cpp、widget.cpp、main.cppは読めば1を単に分割しただけなので、ここではCMakeLists.txtのみを示します。
+[2. Layout・ファイル分割](../02_qt5_layout/)のwidgetを参考に、`rviz_common::Panel`クラスを継承したクラスに変更します。
 
-```cmake
+```cpp
+// ===== 追記 =====
+
+// Q_MOC_RUN is defined when this file is processed by moc
+#ifndef Q_MOC_RUN
+#include <rviz_common/panel.hpp>
+
+#include <rviz_common/config.hpp>
+#include <rviz_common/display_context.hpp>
+#endif
+// =================
+namespace rviz2panel_hello
+{
+...
+
+// ===== 変更前 =====
+// class ExampleWidget : public QWidget
+// ----- 変更後 -----
+class ExampleWidget : public rviz_common::Panel
+// =================
+{
+    ...
+```
+
+```cpp
+namespace rviz2panel_hello
+{
+ExampleWidget::ExampleWidget(QWidget * parent = nullptr)
+// ===== 変更前 =====
+// : QWidget(parent)
+// ----- 変更後 -----
+: rviz_common::Panel(parent)
+// =================
+{
+    ...
+}
+...
+
+} // namespace rviz2panel_hello
+// ===== 追記 =====
+#include <pluginlib/class_list_macros.hpp>
+PLUGINLIB_EXPORT_CLASS(rviz2panel_hello::ExampleWidget, rviz_common::Panel)
+```
+
+UIは、[1. Qt5 Hello World!](../01_qt5_hello_world/README.md)のものをそのまま使用します。
+
+### プラグインの登録
+
+プラグインをRviz2に登録するために、 `plugins_description.xml`ファイルを作成します。
+
+このxmlは、ROS 2のPluginlibによって読み込まれ、プラグインを登録します。
+
+```xml
+<library path="rviz2panel_hello">
+  <class name="rviz2panel_hello/ExampleWidget" type="rviz2panel_hello::ExampleWidget" base_class_type="rviz_common::Panel">
+    <description>button panel</description>
+  </class>
+</library>
+```
+
+ROSパッケージとしてビルドするために、`package.xml` と `CMakeLists.txt` を作成します。
+
+<!-- `ament_cmake_auto` をビルド依存関係の解消 -->
+ビルド依存関係の解消には、`ament_cmake_auto`を使用します。これを使用することで、CMakeLists.txtの記述を簡略化することができます。
+
+```xml
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rviz2panel_hello</name>
+  <version>0.0.0</version>
+  <description>rviz2panel_hello pkg</description>
+  <maintainer email="xxx@yyy.zzz">Ar-Ray-code</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <depend>rviz_common</depend>
+  <depend>qtbase5-dev</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+```
+
+```makefile
 # cmakeの最小要件。ここでは、3.25以上を指定
 cmake_minimum_required(VERSION 3.25)
 # project名
-project(qt5_layout)
+project(rviz2panel_hello)
 
 # UIファイルを自動で変換する設定
 set(CMAKE_AUTOUIC ON)
 
-# Qt5を探す (Core, Gui, Widgetsを使う)
+# 依存関係の解消
+find_package(ament_cmake_auto REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+ament_auto_find_build_dependencies()
 
 set(QT5_LIBS Qt5::Core Qt5::Gui Qt5::Widgets)
 
 # ===== Widget =====
-set(TARGET_WIDGET qt5_layout_widget)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/
-    # (あまり美しくないが)自動生成されたヘッダファイルのパスを追加
-    ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_WIDGET}_autogen/include
 )
-add_library(${TARGET_WIDGET}
-    src/widget/qt5_layout.ui 
+ament_auto_add_library(rviz2panel_hello SHARED
+    src/widget/rviz2panel_hello.ui # 1のUIファイルを流用
     src/widget/widget.cpp)
-target_link_libraries(${TARGET_WIDGET} ${QT5_LIBS})
+target_link_libraries(rviz2panel_hello ${QT5_LIBS})
 
-# ==== MainWindow ====
-add_library(qt5_layout_mainwindow
-    src/mainwindow/mainwindow.cpp)
-target_link_libraries(qt5_layout_mainwindow qt5_layout_widget ${QT5_LIBS})
+# Pluginの登録
+pluginlib_export_plugin_description_file(rviz_common plugins_description.xml)
 
-# ==== Executable ====
-add_executable(qt5_layout_exec
-    src/main.cpp)
-target_link_libraries(qt5_layout_exec qt5_layout_mainwindow ${QT5_LIBS})
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  set(ament_cmake_copyright_FOUND TRUE)
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_auto_package()
 ```
 
-<br>
+これで、プラグインの作成が完了しました。
 
-uiファイルは同じディレクトリに入れてコンパイルする必要があるという制約を回避するために、少しだけ工夫しています。
+## プラグインのビルド
 
-`qt5_layout_widget` というウィジェットライブラリを作成したときに、そのUI定義は `build/qt5_layout_widget_autogen/include` に出力されます。これをincludeディレクトリに追加することで、自動生成されたヘッダファイルを他のファイルから参照できるようにしています。
+```bash
+cd <path to target_ros2_ws>/
+source /opt/ros/humble/setup.bash
 
-```cmake
-set(TARGET_WIDGET qt5_layout_widget)
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/
-    # (あまり美しくないが)自動生成されたヘッダファイルのパスを追加
-    ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_WIDGET}_autogen/include
-)
-add_library(${TARGET_WIDGET}
-    src/widget/qt5_layout.ui 
-    src/widget/widget.cpp)
+colcon build --packages-select rviz2panel_hello
 ```
 
-ファイルを分割してライブラリとしてリンクさせることで、変更した箇所だけ再ビルドされます。
+## Rviz2へのプラグインの追加
 
-<br>
+ビルドが完了したら、Rviz2にプラグインを追加します。
+
+```bash
+source <path to target_ros2_ws>/install/setup.bash
+rviz2
+```
+
+Rviz2が起動したら、左上の「Panels」から「Add New Panel」を選択し、先程ビルドしたプラグインを選択します。
+
+![](../imgs/020_00_rviz2_add_new_panel.png)
+
+![](../imgs/021_00_rviz2_select_new_panel.png)
+
+[1. Qt5 Hello World!](../01_qt5_hello_world/)で作成したプラグインがRviz2に追加されました。
+
+![](../imgs/022_00_rviz2_added_new_panel.png)
+
+非表示の際は、ウィジェット右上の「×」をクリック、削除する場合は「Panels→Delete Panel」の順に選択し、削除するウィジェット名を選択します。

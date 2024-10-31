@@ -23,7 +23,7 @@ Qt Designerでは、デフォルトのウィジェットのみ用意されてい
 
 ![](../imgs/013_00_promoted_widgets.png)
 
-`Promote to...` を選択すると、以下のダイアログが表示されます。
+`Promote widgets...` を選択すると、以下のダイアログが表示されます。
 
 `Promoted class name:` にカスタムウィジェットのクラス名を入力します。クラス名を入力すると、`Header file` にはヘッダファイルのパスが自動的に入力されます。
 
