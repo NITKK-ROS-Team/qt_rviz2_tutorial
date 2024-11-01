@@ -49,6 +49,24 @@ Rviz2向けのプラグインを作成するためには、`rviz_common::Panel`�
 
 [2. Layout・ファイル分割](../02_qt5_layout/)のwidgetを参考に、`rviz_common::Panel`クラスを継承したクラスに変更します。
 
+<br>
+
+`rviz_common::Panel` クラスを継承すると、次の関数をオーバーライドすることができます。特に設定しなかった場合は、なにもしません。
+
+| 関数名| 説明|
+|---|---|
+| onInitialize()| DisplayContextが利用可能な状態での初期化を行う|
+| getName()| 名前を返す|
+| setName()| 名前を設定する|
+| getDescription()| パネルの説明を返す|
+| setDescription()| パネルの説明を設定する（通常、ファクトリによって呼ばれる）|
+| getClassId()| インスタンスを作成する際に使用されたクラスIDを返す| setClassId()で設定されたIDを返す |
+| setClassId()| インスタンスを作成する際に使用するクラスIDを設定する（通常、ファクトリによって呼ばれる）|
+| load()| 設定データをロードする（パネルの名前を読み込む）|
+| save()| 設定データを保存する（パネルの名前とクラスIDを保存する）|
+
+<br>
+
 ```cpp
 // ===== 追記 =====
 
@@ -99,7 +117,7 @@ UIは、[1. Qt5 Hello World!](../01_qt5_hello_world/README.md)のものをその
 
 プラグインをRviz2に登録するために、 `plugins_description.xml`ファイルを作成します。
 
-このxmlは、ROS 2のPluginlibによって読み込まれ、プラグインを登録します。
+このxmlは、ROS 2のPluginlibの仕様に従って記述します。
 
 ```xml
 <library path="rviz2panel_hello">
