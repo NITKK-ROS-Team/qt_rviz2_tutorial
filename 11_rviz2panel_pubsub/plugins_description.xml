@@ -1,0 +1,5 @@
+<library path="rviz2panel_pubsub">
+  <class name="rviz2panel_pubsub/ExampleWidget" type="rviz2panel_pubsub::ExampleWidget" base_class_type="rviz_common::Panel">
+    <description>button panel</description>
+  </class>
+</library>
