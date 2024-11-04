@@ -1,5 +1,5 @@
-# cmakeの最小要件。ここでは、3.25以上を指定
-cmake_minimum_required(VERSION 3.25)
+# cmakeの最小要件。ここでは、3.5以上を指定
+cmake_minimum_required(VERSION 3.5)
 # project名
 project(qt5_hello_world)
 
