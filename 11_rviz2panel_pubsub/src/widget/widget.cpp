@@ -38,13 +38,9 @@ void ExampleWidget::onInitialize()
 void ExampleWidget::onPushButtonClicked()
 {
   static uint32_t counter = 0;
-  // カウンタをインクリメントしてラベルに表示
-  // ui.example_label->setText(QString("%1").arg(++counter));
-
-  counter++;
   // パブリッシャを使ってメッセージを送信
   std_msgs::msg::String msg;
-  msg.data = std::to_string(counter);
+  msg.data = std::to_string(++counter);
   qt_node_pub_handler_.publishMsg(msg);
 }
 

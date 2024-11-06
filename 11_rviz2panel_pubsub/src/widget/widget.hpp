@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef rviz2panel_pubsub_WIDGET_HPP_
-#define rviz2panel_pubsub_WIDGET_HPP_
+#ifndef RVIZ2PANEL_PUBSUB_WIDGET_HPP_
+#define RVIZ2PANEL_PUBSUB_WIDGET_HPP_
 
 // 作成した.uiファイル名によって変わる
 // xxx.ui -> ui_xxx.h
@@ -49,10 +49,10 @@ private:
   Ui::ExampleWidget ui;
 
   // パブリッシャのハンドラ
-  QtNodePubHandler qt_node_pub_handler_;
-  QtNodeSubHandler qt_node_sub_handler_;
+  QtNodePubHandler<std_msgs::msg::String> qt_node_pub_handler_;
+  QtNodeSubHandler<std_msgs::msg::String> qt_node_sub_handler_;
 };
 
 } // namespace rviz2panel_pubsub
 
-#endif //rviz2panel_pubsub_WIDGET_HPP_
+#endif //RVIZ2PANEL_PUBSUB_WIDGET_HPP_

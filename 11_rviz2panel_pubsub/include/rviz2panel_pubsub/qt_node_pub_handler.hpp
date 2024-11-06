@@ -1,30 +1,23 @@
-// Copyright 2024 StrayedCats.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Copyright (c) 2024 NITK.K ROS-Team
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-#pragma once
+#ifndef RVIZ2PANEL_PUBSUB_QT_NODE_PUB_HANDLER_HPP_
+#define RVIZ2PANEL_PUBSUB_QT_NODE_PUB_HANDLER_HPP_
 
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/string.hpp>
-
+#include "ros_types.hpp"
 
 namespace rviz2panel_pubsub
 {
 
+template<typename T>
 class QtNodePubHandler
 {
 public:
-  QtNodePubHandler(void) {}
+  QtNodePubHandler() {}
 
   void setRosNodePtr(const rclcpp::Node::SharedPtr node_ptr)
   {
@@ -33,24 +26,25 @@ public:
 
   void initializePublisher(const std::string topic_name)
   {
-    qt_node_publisher_ =
-      node_ptr_->create_publisher<std_msgs::msg::String>(topic_name, 10);
+    qt_node_publisher_ = node_ptr_->create_publisher<T>(topic_name, 10);
   }
 
-  void finalizePublisher(void)
+  void finalizePublisher()
   {
     qt_node_publisher_.reset();
   }
 
-  void publishMsg(const std_msgs::msg::String & msg)
+  void publishMsg(const T & msg)
   {
     qt_node_publisher_->publish(msg);
   }
 
 private:
   rclcpp::Node::SharedPtr node_ptr_;
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr qt_node_publisher_;
+  typename rclcpp::Publisher<T>::SharedPtr qt_node_publisher_;
   
 };
 
 } // namespace rviz2panel_pubsub
+
+#endif //RVIZ2PANEL_PUBSUB_QT_NODE_PUB_HANDLER_HPP_
