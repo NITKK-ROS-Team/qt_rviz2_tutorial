@@ -34,3 +34,13 @@ set(QT5_LIBS ${QT5_LIBS} qt5_layout_mainwindow)
 add_executable(qt5_layout_exec
     src/main.cpp)
 target_link_libraries(qt5_layout_exec ${QT5_LIBS})
+
+add_executable(qt5_layout_splash_screen
+    src/main_splash_screen.cpp)
+target_link_libraries(qt5_layout_splash_screen ${QT5_LIBS})
+
+# ===== ファイルのコピー =====
+add_custom_command(TARGET qt5_layout_exec POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/resource
+    $<TARGET_FILE_DIR:qt5_layout_exec>)
