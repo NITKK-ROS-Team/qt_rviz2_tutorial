@@ -1,4 +1,4 @@
-# QtとROS Pub-Sub
+# 12. QtとROS Pub-Sub
 
 Rviz2に埋めるPub-Subのサンプルです。
 
