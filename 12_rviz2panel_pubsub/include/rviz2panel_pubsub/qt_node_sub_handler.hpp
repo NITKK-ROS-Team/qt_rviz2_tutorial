@@ -30,7 +30,7 @@ public:
     msg_queue_size_ = msg_queue_size;
 
     qt_node_subscription_ = node_ptr_->create_subscription<T>(
-        topic_name, 1, std::bind(&QtNodeSubHandler::onMsgReceived, this, std::placeholders::_1));
+      topic_name, 1, std::bind(&QtNodeSubHandler::onMsgReceived, this, std::placeholders::_1));
   }
 
   void finalizeSubscription()
@@ -42,16 +42,14 @@ public:
   {
     msg_queue_.push(msg);
 
-    while (msg_queue_.size() > msg_queue_size_)
-    {
+    while (msg_queue_.size() > msg_queue_size_) {
       msg_queue_.pop();
     }
   }
 
-  bool getMsg(typename T::SharedPtr &msg)
+  bool getMsg(typename T::SharedPtr & msg)
   {
-    if (msg_queue_.empty())
-    {
+    if (msg_queue_.empty()) {
       return false;
     }
 
@@ -60,17 +58,15 @@ public:
     return true;
   }
 
-  bool getLatestMsg(typename T::SharedPtr &msg)
+  bool getLatestMsg(typename T::SharedPtr & msg)
   {
-    if (msg_queue_.empty())
-    {
+    if (msg_queue_.empty()) {
       return false;
     }
 
     msg = msg_queue_.back();
     // キューをクリア
-    while (!msg_queue_.empty())
-    {
+    while (!msg_queue_.empty()) {
       msg_queue_.pop();
     }
     return true;

@@ -14,7 +14,8 @@ class ExampleWidget : public BaseExampleWidget<rviz_common::Panel>
 {
 public:
   // 初期化
-  explicit ExampleWidget(QWidget * parent = nullptr) : BaseExampleWidget(parent) {}
+  explicit ExampleWidget(QWidget * parent = nullptr)
+  : BaseExampleWidget(parent) {}
 
   // rviz pluginのオーバーライド
   void onInitialize() override

@@ -9,17 +9,19 @@
 namespace rviz2panel_hello_template
 {
 
-template <class T>
+template<class T>
 BaseExampleWidget<T>::BaseExampleWidget(QWidget * parent)
 : T(parent)
 {
   // UIの初期化
   ui.setupUi(this);
   // ボタンがクリックされたときの処理を設定
-  this->connect(ui.example_push_button, &QPushButton::clicked, this, &BaseExampleWidget::onPushButtonClicked);
+  this->connect(
+    ui.example_push_button, &QPushButton::clicked, this,
+    &BaseExampleWidget::onPushButtonClicked);
 }
 
-template <class T>
+template<class T>
 void BaseExampleWidget<T>::onPushButtonClicked()
 {
   static uint32_t counter = 0;

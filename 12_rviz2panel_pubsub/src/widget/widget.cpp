@@ -22,11 +22,13 @@ ExampleWidget::ExampleWidget(QWidget * parent = nullptr)
 void ExampleWidget::onInitialize()
 {
   // パブリッシャの初期化
-  qt_node_pub_handler_.setRosNodePtr(this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
+  qt_node_pub_handler_.setRosNodePtr(
+    this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
   qt_node_pub_handler_.initializePublisher("example_topic");
 
   // サブスクライバの初期化
-  qt_node_sub_handler_.setRosNodePtr(this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
+  qt_node_sub_handler_.setRosNodePtr(
+    this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
   qt_node_sub_handler_.initializeSubscription("example_topic");
 
   // タイマーの設定 30hz
@@ -48,8 +50,7 @@ void ExampleWidget::onTimer()
 {
   // サブスクライバを使ってメッセージを受信
   std_msgs::msg::String::SharedPtr msg;
-  if (qt_node_sub_handler_.getMsg(msg))
-  {
+  if (qt_node_sub_handler_.getMsg(msg)) {
     // 受信したメッセージをラベルに表示
     ui.example_label->setText(QString::fromStdString(msg->data));
   }

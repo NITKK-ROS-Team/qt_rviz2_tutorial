@@ -42,7 +42,7 @@ public:
 private:
   rclcpp::Node::SharedPtr node_ptr_;
   typename rclcpp::Publisher<T>::SharedPtr qt_node_publisher_;
-  
+
 };
 
 } // namespace rviz2panel_pubsub

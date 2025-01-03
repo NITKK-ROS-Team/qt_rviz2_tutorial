@@ -27,7 +27,7 @@ namespace rviz2panel_hello_template
 {
 
 // Widgetのクラス
-template <class T>
+template<class T>
 class BaseExampleWidget : public T
 {
 public:

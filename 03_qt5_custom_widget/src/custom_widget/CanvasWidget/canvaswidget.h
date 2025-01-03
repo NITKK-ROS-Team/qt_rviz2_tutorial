@@ -13,20 +13,20 @@
 #include <QMouseEvent>
 
 
-class CanvasWidget : public QLabel{
+class CanvasWidget: public QLabel {
 public:
-    explicit CanvasWidget(QWidget *parent);
-    ~CanvasWidget() = default;
+  explicit CanvasWidget(QWidget * parent);
+  ~CanvasWidget() = default;
 
-    void drawPoint(int x, int y);
-    void reset(const uint32_t size);
+  void drawPoint(int x, int y);
+  void reset(const uint32_t size);
 
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
+  void mousePressEvent(QMouseEvent * event) override;
+  void mouseMoveEvent(QMouseEvent * event) override;
 
 private:
-    QPixmap loaded_image_;
-    QLabel *image_window_;
+  QPixmap loaded_image_;
+  QLabel * image_window_;
 };
 
 
