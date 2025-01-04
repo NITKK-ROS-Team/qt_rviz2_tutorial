@@ -1,4 +1,4 @@
-# 12. QtとROS Actionの連携
+# 14. QtとROS Actionの連携
 
 Rviz2に埋めるAction Clientのサンプルです。
 

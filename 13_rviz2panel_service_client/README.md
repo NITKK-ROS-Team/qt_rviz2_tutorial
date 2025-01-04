@@ -1,4 +1,4 @@
-# 12. QtとROS Serviceの連携
+# 13. QtとROS Serviceの連携
 
 Rviz2に埋めるService Clientのサンプルです。
 
