@@ -48,7 +48,7 @@ private:
   Ui::ExampleWidget ui;
 
   // パブリッシャのハンドラ
-  QtNodeServiceClientHandler<example_interfaces::srv::AddTwoInts> qt_node_client_handler_;
+  QtNodeServiceClientHandler<example_interfaces::srv::AddTwoInts> qt_node_service_client_handler_;
 };
 
 } // namespace rviz2panel_service_client

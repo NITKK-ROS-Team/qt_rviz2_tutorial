@@ -22,9 +22,9 @@ ExampleWidget::ExampleWidget(QWidget * parent = nullptr)
 void ExampleWidget::onInitialize()
 {
   // サービスクライアントの初期化
-  qt_node_client_handler_.setRosNodePtr(
+  qt_node_service_client_handler_.setRosNodePtr(
     this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
-  qt_node_client_handler_.initializeClient("add_two_ints");
+  qt_node_service_client_handler_.initializeClient("add_two_ints");
 
   // タイマーの設定 30hz
   timer_.setInterval(1000 / 30);
@@ -40,14 +40,14 @@ void ExampleWidget::onPushButtonClicked()
   request->a = counter;
   request->b = counter + 1;
   // サービスリクエストの送信
-  qt_node_client_handler_.sendRequest(request);
+  qt_node_service_client_handler_.sendRequest(request);
   counter++;
 }
 
 void ExampleWidget::onTimer()
 {
   example_interfaces::srv::AddTwoInts::Response::SharedPtr msg;
-  if (qt_node_client_handler_.getResponse(msg)) {
+  if (qt_node_service_client_handler_.getResponse(msg)) {
     // メッセージの表示
     int32_t sum = static_cast<int32_t>(msg->sum);
     std::string str = std::to_string((sum - 1) / 2) + " + " + std::to_string((sum - 1) / 2 + 1) +
