@@ -94,3 +94,11 @@ void ExampleWidget::onTimer()
 ```
 
 <br>
+
+
+## Service Serverの起動
+
+```bash
+source /opt/ros/humble/setup.bash
+ros2 run examples_rclcpp_minimal_service service_main
+``` 
