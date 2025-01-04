@@ -16,7 +16,6 @@ ExampleWidget::ExampleWidget(QWidget * parent = nullptr)
   ui.setupUi(this);
   // ボタンがクリックされたときの処理を設定
   connect(ui.example_push_button, &QPushButton::clicked, this, &ExampleWidget::onPushButtonClicked);
-  // timer_ = new QTimer(this);
 }
 
 void ExampleWidget::onInitialize()
