@@ -10,10 +10,10 @@ namespace rviz2panel_service_client
 {
 
 template<typename ServiceT>
-class QtNodeClientHandler
+class QtNodeServiceClientHandler
 {
 public:
-  QtNodeClientHandler() {}
+  QtNodeServiceClientHandler() {}
 
   void setRosNodePtr(const rclcpp::Node::SharedPtr node_ptr)
   {

@@ -16,7 +16,7 @@ ROSのService Client実装にはQtのインタフェースは入っておらず�
 
 ROS 2に関連する実装は次のとおりです。
 
-- `include/rviz2panel_service_client/qt_node_client_handler.hpp` : 
+- `include/rviz2panel_service_client/qt_node_server_client_handler.hpp` : 
 Service Clientのハンドラクラス
 - `include/rviz2panel_service_client/ros_types.hpp` : ROSのメッセージ型の定義 (Service Clientのリクエスト/レスポンス)
 
@@ -27,7 +27,7 @@ Service Clientのハンドラクラス
 ├── CMakeLists.txt
 ├── include
 │   └── rviz2panel_service_client
-│       ├── qt_node_client_handler.hpp
+│       ├── qt_node_server_client_handler.hpp
 │       └── qt_node_sub_handler.hpp
 │       └── ros_types.hpp
 ├── package.xml
@@ -50,8 +50,8 @@ Service Clientのハンドラクラス
 
 ```cpp
 // onInitialize()内での初期化
-qt_node_client_handler_.setRosNodePtr(this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
-qt_node_client_handler_.initializeClient("add_two_ints");
+qt_node_server_client_handler_.setRosNodePtr(this->getDisplayContext()->getRosNodeAbstraction().lock()->get_raw_node());
+qt_node_server_client_handler_.initializeClient("add_two_ints");
 ```
 
 ### メッセージ送信
@@ -65,7 +65,7 @@ void ExampleWidget::onPushButtonClicked()
   request->a = counter;
   request->b = counter + 1;
   // サービスリクエストの送信
-  qt_node_client_handler_.sendRequest(request);
+  qt_node_server_client_handler_.sendRequest(request);
   counter++;
 }
 ```
@@ -84,7 +84,7 @@ void ExampleWidget::onPushButtonClicked()
 void ExampleWidget::onTimer()
 {
   example_interfaces::srv::AddTwoInts::Response::SharedPtr msg;
-  if (qt_node_client_handler_.getResponse(msg)) {
+  if (qt_node_server_client_handler_.getResponse(msg)) {
     // メッセージの表示
     uint32_t sum = msg->sum;
     std::string str = std::to_string((sum - 1) / 2) + " + " + std::to_string((sum - 1) / 2 + 1) + " = " + std::to_string(sum);

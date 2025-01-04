@@ -1,0 +1,5 @@
+<library path="rviz2panel_action_client">
+  <class name="rviz2panel_action_client/ExampleWidget" type="rviz2panel_action_client::ExampleWidget" base_class_type="rviz_common::Panel">
+    <description>button panel</description>
+  </class>
+</library>

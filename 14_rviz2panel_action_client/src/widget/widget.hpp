@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef RVIZ2PANEL_SERVICE_CLIENT_WIDGET_HPP_
-#define RVIZ2PANEL_SERVICE_CLIENT_WIDGET_HPP_
+#ifndef RVIZ2PANEL_ACTION_CLIENT_WIDGET_HPP_
+#define RVIZ2PANEL_ACTION_CLIENT_WIDGET_HPP_
 
 // 作成した.uiファイル名によって変わる
 // xxx.ui -> ui_xxx.h
-#include "ui_rviz2panel_service_client.h"
+#include "ui_rviz2panel_action_client.h"
 #include <QTimer>
 
 // Q_MOC_RUN is defined when this file is processed by moc
@@ -19,10 +19,10 @@
 #include <rviz_common/config.hpp>
 #include <rviz_common/display_context.hpp>
 
-#include "rviz2panel_service_client/qt_node_service_client_handler.hpp"
+#include "rviz2panel_action_client/qt_node_action_client_handler.hpp"
 #endif
 
-namespace rviz2panel_service_client
+namespace rviz2panel_action_client
 {
 
 // Widgetのクラス
@@ -47,10 +47,9 @@ private:
   QTimer timer_;
   Ui::ExampleWidget ui;
 
-  // パブリッシャのハンドラ
-  QtNodeServiceClientHandler<example_interfaces::srv::AddTwoInts> qt_node_client_handler_;
+  QtNodeActionClientHandler<example_interfaces::action::Fibonacci> qt_node_action_client_handler_;
 };
 
-} // namespace rviz2panel_service_client
+} // namespace rviz2panel_action_client
 
-#endif //RVIZ2PANEL_SERVICE_CLIENT_WIDGET_HPP_
+#endif //RVIZ2PANEL_ACTION_CLIENT_WIDGET_HPP_

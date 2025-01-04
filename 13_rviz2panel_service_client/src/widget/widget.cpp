@@ -49,7 +49,7 @@ void ExampleWidget::onTimer()
   example_interfaces::srv::AddTwoInts::Response::SharedPtr msg;
   if (qt_node_client_handler_.getResponse(msg)) {
     // メッセージの表示
-    uint32_t sum = msg->sum;
+    int32_t sum = static_cast<int32_t>(msg->sum);
     std::string str = std::to_string((sum - 1) / 2) + " + " + std::to_string((sum - 1) / 2 + 1) +
       " = " + std::to_string(sum);
     ui.example_label->setText(QString::fromStdString(str));
