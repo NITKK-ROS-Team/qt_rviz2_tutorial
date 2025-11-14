@@ -15,7 +15,7 @@ set(QT5_LIBS Qt5::Core Qt5::Gui Qt5::Widgets)
 
 # ===== Widget =====
 ament_auto_add_library(rviz2panel_hello_template_rviz SHARED
-    src/widget/base/rviz2panel_hello_template.ui 
+    src/widget/base/rviz2panel_hello_template.ui
     src/widget/base/base_widget.cpp
     src/widget/rviz_widget.cpp
 )
@@ -53,6 +53,7 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   set(ament_cmake_uncrustify_FOUND TRUE)
+  set(ament_cmake_lint_cmake_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 

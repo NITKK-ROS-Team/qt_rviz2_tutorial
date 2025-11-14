@@ -22,7 +22,7 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_WIDGET}_autogen/include
 )
 add_library(${TARGET_WIDGET}
-    src/widget/qt5_hello_ros2_cmake.ui 
+    src/widget/qt5_hello_ros2_cmake.ui
     src/widget/widget.cpp)
 target_link_libraries(${TARGET_WIDGET} ${QT5_LIBS})
 set(QT5_LIBS ${QT5_LIBS} ${TARGET_WIDGET})
@@ -46,6 +46,7 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   set(ament_cmake_uncrustify_FOUND TRUE)
+  set(ament_cmake_lint_cmake_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 
