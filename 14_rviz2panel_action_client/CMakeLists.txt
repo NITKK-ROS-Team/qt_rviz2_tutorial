@@ -18,7 +18,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/
 )
 ament_auto_add_library(rviz2panel_action_client SHARED
-    src/widget/rviz2panel_action_client.ui 
+    src/widget/rviz2panel_action_client.ui
     src/widget/widget.cpp)
 target_link_libraries(rviz2panel_action_client ${QT5_LIBS})
 
@@ -28,6 +28,8 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
+  set(ament_cmake_uncrustify_FOUND TRUE)
+  set(ament_cmake_lint_cmake_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 

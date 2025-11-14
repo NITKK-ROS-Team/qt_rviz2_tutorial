@@ -9,6 +9,7 @@
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
+  <depend>pluginlib</depend>
   <depend>rviz_common</depend>
   <depend>qtbase5-dev</depend>
 

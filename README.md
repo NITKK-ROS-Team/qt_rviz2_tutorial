@@ -1,8 +1,25 @@
 # qt_rviz2_tutorial
 
+[![ROS 2 CI (Multi-Distribution)](https://github.com/NITKK-ROS-Team/qt_rviz2_tutorial/actions/workflows/ros2_ci.yml/badge.svg)](https://github.com/NITKK-ROS-Team/qt_rviz2_tutorial/actions/workflows/ros2_ci.yml)
+[![ROS 2 Jazzy CI](https://github.com/NITKK-ROS-Team/qt_rviz2_tutorial/actions/workflows/jazzy.yml/badge.svg)](https://github.com/NITKK-ROS-Team/qt_rviz2_tutorial/actions/workflows/jazzy.yml)
+
 QtはC++を使用したGUI開発によく使われるツールキットであり、Rviz2のpanelに使用できます。
 
 このチュートリアルでは、Qtの基本からRviz2プラグインの作成までを目標としています。
+
+<br>
+
+## サポートされているROS 2ディストリビューション
+
+このプロジェクトは以下のROS 2ディストリビューションでテストされています：
+
+- ROS 2 Humble Hawksbill (Ubuntu 22.04)
+- ROS 2 Jazzy Jalisco (Ubuntu 24.04)
+- ROS 2 Rolling Ridley (Ubuntu 24.04)
+
+CI（継続的インテグレーション）により、各ディストリビューションでのビルドとテストが自動的に実行されます。
+
+**注記**: ROS 2 Iron Irwiniは、`ament_cmake_auto`とrviz_commonの互換性の問題により、サポートから除外されています。
 
 <br>
 

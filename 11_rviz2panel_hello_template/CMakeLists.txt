@@ -15,7 +15,7 @@ set(QT5_LIBS Qt5::Core Qt5::Gui Qt5::Widgets)
 
 # ===== Widget =====
 ament_auto_add_library(rviz2panel_hello_template_rviz SHARED
-    src/widget/base/rviz2panel_hello_template.ui 
+    src/widget/base/rviz2panel_hello_template.ui
     src/widget/base/base_widget.cpp
     src/widget/rviz_widget.cpp
 )
@@ -29,9 +29,9 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_WIDGET}_autogen/include
 )
 ament_auto_add_library(${TARGET_WIDGET} SHARED
-    src/widget/base/rviz2panel_hello_template.ui 
+    src/widget/base/rviz2panel_hello_template.ui
     src/widget/base/base_widget.cpp
-    src/widget/qt_widget.hpp
+    src/widget/qt_widget.cpp
 )
 target_link_libraries(${TARGET_WIDGET} ${QT5_LIBS})
 set(QT5_LIBS ${QT5_LIBS} ${TARGET_WIDGET})
@@ -52,6 +52,8 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
+  set(ament_cmake_uncrustify_FOUND TRUE)
+  set(ament_cmake_lint_cmake_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 
