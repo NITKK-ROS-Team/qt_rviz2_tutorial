@@ -20,6 +20,8 @@ jobs:
             ubuntu_version: ubuntu-22.04
           - ros_distro: jazzy
             ubuntu_version: ubuntu-24.04
+          - ros_distro: rolling
+            ubuntu_version: ubuntu-24.04
 
     container:
       image: ros:${{ matrix.ros_distro }}-ros-base
