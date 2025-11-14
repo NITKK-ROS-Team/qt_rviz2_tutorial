@@ -41,5 +41,13 @@ ament_auto_add_executable(qt5_hello_ros2_cmake_exec
     src/main.cpp)
 target_link_libraries(qt5_hello_ros2_cmake_exec ${QT5_LIBS})
 
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  set(ament_cmake_copyright_FOUND TRUE)
+  set(ament_cmake_cpplint_FOUND TRUE)
+  set(ament_cmake_uncrustify_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
 # amentのパッケージ情報を生成
 ament_auto_package()
