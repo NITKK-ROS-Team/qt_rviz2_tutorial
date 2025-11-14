@@ -14,11 +14,12 @@ QtはC++を使用したGUI開発によく使われるツールキットであり
 このプロジェクトは以下のROS 2ディストリビューションでテストされています：
 
 - ROS 2 Humble Hawksbill (Ubuntu 22.04)
-- ROS 2 Iron Irwini (Ubuntu 22.04)
 - ROS 2 Jazzy Jalisco (Ubuntu 24.04)
 - ROS 2 Rolling Ridley (Ubuntu 24.04)
 
 CI（継続的インテグレーション）により、各ディストリビューションでのビルドとテストが自動的に実行されます。
+
+**注記**: ROS 2 Iron Irwiniは、`ament_cmake_auto`とrviz_commonの互換性の問題により、サポートから除外されています。
 
 <br>
 

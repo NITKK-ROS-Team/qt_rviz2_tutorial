@@ -16,8 +16,6 @@ jobs:
         include:
           - ros_distro: humble
             ubuntu_version: ubuntu-22.04
-          - ros_distro: iron
-            ubuntu_version: ubuntu-22.04
           - ros_distro: jazzy
             ubuntu_version: ubuntu-24.04
           - ros_distro: rolling
